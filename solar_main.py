@@ -6,6 +6,9 @@ from tkinter.filedialog import *
 from solar_vis import *
 from solar_model import *
 from solar_input import *
+from plot1 import *
+from plot2 import *
+from plot3 import *
 
 perform_execution = False
 """Флаг цикличности выполнения расчёта"""
@@ -97,9 +100,40 @@ def save_file_dialog():
     функцию считывания параметров системы небесных тел из данного файла.
     Считанные объекты сохраняются в глобальный список space_objects
     """
-    out_filename = asksaveasfilename(filetypes=(("Text file", ".txt"),))
+    out_filename = ('stats.txt')
+    # out_filename = asksaveasfilename(filetypes=(("Text file", ".txt"),))
     write_space_objects_data_to_file(out_filename, space_objects)
 
+def write_space_objects_data_to_file(output_filename, space_objects):
+    """Сохраняет данные о космических объектах в файл.
+    Строки должны иметь следующий формат:
+    <время> Star <радиус в пикселах> <цвет> <масса> <x> <y> <Vx> <Vy>
+    <время> Planet <радиус в пикселах> <цвет> <масса> <x> <y> <Vx> <Vy>
+    Параметры:
+    **output_filename** — имя входного файла
+    **space_objects** — список объектов планет и звёзд
+    """
+    with open(output_filename, 'a') as out_file:
+        for obj in space_objects:
+            #print(out_file, obj.type, ' ' ,obj.R, ' ', obj.color, ' ', obj.m, ' ', obj.x, ' ', obj.y, ' ', obj.Vx, ' ', obj.Vy)
+            text_f = open(output_filename, 'a')
+            text_f.write(str(physical_time))
+            text_f.write(' ')
+            text_f.write(obj.type)
+            text_f.write(' ')
+            text_f.write(obj.color)
+            text_f.write(' ')
+            text_f.write(str(obj.m))
+            text_f.write(' ')
+            text_f.write(str(obj.x))
+            text_f.write(' ')
+            text_f.write(str(obj.y))
+            text_f.write(' ')
+            text_f.write(str(obj.Vx))
+            text_f.write(' ')
+            text_f.write(str(obj.Vy))
+            text_f.write("\n")
+            text_f.close()
 
 def main():
     """Главная функция главного модуля.
@@ -146,6 +180,10 @@ def main():
     time_label.pack(side=tkinter.RIGHT)
 
     root.mainloop()
+    picture1()
+    picture2()
+    picture3()
+
     print('Modelling finished!')
 
 if __name__ == "__main__":

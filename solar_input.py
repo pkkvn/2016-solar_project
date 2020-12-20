@@ -48,14 +48,13 @@ def parse_star_parameters(line, star):
     **star** — объект звезды.
     """
 
-    list_1 = line.split()
-    star.R = float(list_1[1])
-    star.color = list_1[2]
-    star.m = float(list_1[3])
-    star.x = float(list_1[4])
-    star.y = float(list_1[5])
-    star.Vx = float(list_1[6])
-    star.Vy = float(list_1[7])
+    star.R = float(line.split()[1].lower())
+    star.color = line.split()[2].lower()
+    star.m = float(line.split()[3].lower())
+    star.x = float(line.split()[4].lower())
+    star.y = float(line.split()[5].lower())
+    star.Vx = float(line.split()[6].lower())
+    star.Vy = float(line.split()[7].lower())
 
 
 
@@ -74,14 +73,13 @@ def parse_planet_parameters(line, planet):
     **line** — строка с описание планеты.
     **planet** — объект планеты.
     """
-    list_2 = line.split()
-    planet.R = float(list_2[1])
-    planet.color = list_2[2]
-    planet.m = float(list_2[3])
-    planet.x = float(list_2[4])
-    planet.y = float(list_2[5])
-    planet.Vx = float(list_2[6])
-    planet.Vy = float(list_2[7])
+    planet.R = float(line.split()[1].lower())
+    planet.color = line.split()[2].lower()
+    planet.m = float(line.split()[3].lower())
+    planet.x = float(line.split()[4].lower())
+    planet.y = float(line.split()[5].lower())
+    planet.Vx = float(line.split()[6].lower())
+    planet.Vy = float(line.split()[7].lower())
 
 
 
@@ -99,9 +97,9 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     """
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            print(out_file, "%s %f %d %f %f %f %f %f" % (obj.type, obj.R, obj.color, obj.m, obj.x, obj.y, obj.Vx, obj.Vy))
-
+            print(out_file, "%s %d %s %f %f %f %f %f \n" % (obj.type, obj.R, obj.color, obj.m, obj.x, obj.y, obj.Vx, obj.Vy))
 # FIXME: хорошо бы ещё сделать функцию, сохраняющую статистику в заданный файл...
+
 
 if __name__ == "__main__":
     print("This module is not for direct call!")
